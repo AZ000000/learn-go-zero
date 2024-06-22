@@ -3,7 +3,6 @@ package handler
 import (
 	"net/http"
 
-	"github.com/zeromicro/go-zero/rest/httpx"
 	"zeroStudy/api_study/user/api_jwt/internal/logic"
 	"zeroStudy/api_study/user/api_jwt/internal/svc"
 	"zeroStudy/common/response"

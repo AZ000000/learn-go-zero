@@ -2,10 +2,11 @@ package logic
 
 import (
 	"context"
-	"zeroStudy/common/jwts"
+	"fmt"
+	"zeroStudy/model_study/user/model"
 
-	"zeroStudy/api_study/user/api_jwt/internal/svc"
-	"zeroStudy/api_study/user/api_jwt/internal/types"
+	"zeroStudy/model_study/user/api/internal/svc"
+	"zeroStudy/model_study/user/api/internal/types"
 
 	"github.com/zeromicro/go-zero/core/logx"
 )
@@ -26,14 +27,13 @@ func NewLoginLogic(ctx context.Context, svcCtx *svc.ServiceContext) *LoginLogic 
 
 func (l *LoginLogic) Login(req *types.LoginRequest) (resp string, err error) {
 	// todo: add your logic here and delete this line
-	auth := l.svcCtx.Config.Auth
-	token, err := jwts.GenToken(jwts.JwtPayload{
-		UserID:   1,
-		Username: "aa",
-		Role:     1,
-	}, auth.AccessSecret, auth.AccessExpire)
+	res, err := l.svcCtx.UserModel.Insert(l.ctx, &model.User{
+		Username: "username",
+		Password: "123",
+	})
 	if err != nil {
 		return "", err
 	}
-	return token, nil
+	fmt.Println(res)
+	return "success", nil
 }
